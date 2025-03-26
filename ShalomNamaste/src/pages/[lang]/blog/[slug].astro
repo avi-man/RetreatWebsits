@@ -1,0 +1,78 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getLanguageFromPath } from '../../../lib/language';
+import { t } from '../../../lib/translations';
+import { fetchBlogPost } from '../../../lib/strapi';
+
+const { lang, slug } = Astro.params;
+const currentLang = getLanguageFromPath(Astro.url.pathname);
+
+// Fetch blog post
+const { data: post } = await fetchBlogPost(slug, currentLang);
+
+// If no post is found, return 404
+if (!post) {
+  return Astro.redirect(`/${currentLang}/404`);
+}
+
+const imageUrl = post.attributes.featuredImage?.data?.attributes?.url 
+  ? `${import.meta.env.PUBLIC_STRAPI_API_URL}${post.attributes.featuredImage.data.attributes.url}`
+  : '/images/placeholder.jpg';
+---
+
+<Layout
+  title={post.attributes.Title}
+  description={post.attributes.seo[0]?.metaDescription || post.attributes.excerpt}
+>
+  <!-- Hero Section -->
+  <section class="relative py-20 bg-forest-900 text-white">
+    <div class="absolute inset-0">
+      <img
+        src={imageUrl}
+        alt={post.attributes.Title}
+        class="w-full h-full object-cover opacity-20"
+      />
+    </div>
+    <div class="relative container mx-auto px-4">
+      <div class="max-w-3xl mx-auto">
+        <div class="flex items-center text-sm mb-4">
+          <span>{new Date(post.attributes.publishedAt).toLocaleDateString(currentLang)}</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">
+          {post.attributes.Title}
+        </h1>
+        <p class="text-xl">
+          {post.attributes.excerpt}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto prose prose-lg">
+        <div set:html={post.attributes.content} />
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  :global(.prose) {
+    max-width: none;
+  }
+  :global(.prose img) {
+    border-radius: 0.5rem;
+    margin: 2rem 0;
+  }
+  :global(.prose h2) {
+    color: var(--color-forest-900);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  :global(.prose p) {
+    color: var(--color-forest-700);
+    line-height: 1.8;
+  }
+</style> 

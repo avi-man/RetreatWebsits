@@ -1,0 +1,157 @@
+---
+import Layout from '../layouts/Layout.astro';
+import "../styles/global.css";
+
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<Layout>
+	<!-- Hero Section -->
+	<section class="relative h-screen flex items-center justify-center overflow-hidden">
+		<div class="absolute inset-0 z-0">
+			<img
+				src="/images/hero-bg.jpg"
+				alt="Misty mountain sunrise"
+				class="w-full h-full object-cover"
+			/>
+			<div class="absolute inset-0 bg-forest-900/40"></div>
+		</div>
+		<div class="relative z-10 text-center text-white px-4">
+			<h1 class="text-5xl md:text-7xl font-playfair font-bold mb-6">
+				Where Peace Meets Adventure
+			</h1>
+			<p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
+				Experience transformative wellness retreats and Himalayan adventures that nourish your soul
+			</p>
+			<a
+				href="/packages"
+				class="inline-block bg-sunrise-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-sunrise-700 transition-colors"
+			>
+				Step Into Serenity
+			</a>
+		</div>
+	</section>
+
+	<!-- Featured Retreats -->
+	<section class="py-20 bg-cream-50">
+		<div class="container mx-auto px-4">
+			<h2 class="text-4xl font-playfair font-bold text-center mb-12">Featured Retreats</h2>
+			<div class="grid md:grid-cols-2 gap-8">
+				<div class="bg-white rounded-lg shadow-lg overflow-hidden">
+					<img
+						src="/images/healing-retreat.jpg"
+						alt="30-day healing retreat"
+						class="w-full h-64 object-cover"
+					/>
+					<div class="p-6">
+						<h3 class="text-2xl font-playfair font-bold mb-4">30-Day Healing Retreat</h3>
+						<p class="text-forest-700 mb-4">
+							Immerse yourself in a transformative journey of yoga, meditation, and sound healing.
+						</p>
+						<a
+							href="/packages#healing-retreat"
+							class="inline-block text-sunrise-600 font-semibold hover:text-sunrise-700"
+						>
+							Learn More →
+						</a>
+					</div>
+				</div>
+				<div class="bg-white rounded-lg shadow-lg overflow-hidden">
+					<img
+						src="/images/nature-culture.jpg"
+						alt="15-day nature-culture combo"
+						class="w-full h-64 object-cover"
+					/>
+					<div class="p-6">
+						<h3 class="text-2xl font-playfair font-bold mb-4">15-Day Nature & Culture Combo</h3>
+						<p class="text-forest-700 mb-4">
+							Combine wellness practices with Himalayan treks and cultural exploration.
+						</p>
+						<a
+							href="/packages#nature-culture"
+							class="inline-block text-sunrise-600 font-semibold hover:text-sunrise-700"
+						>
+							Learn More →
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Journey Map -->
+	<section class="py-20 bg-forest-900 text-white">
+		<div class="container mx-auto px-4">
+			<h2 class="text-4xl font-playfair font-bold text-center mb-12">Your Journey Map</h2>
+			<div class="grid md:grid-cols-3 gap-8">
+				<div class="text-center">
+					<div class="w-16 h-16 bg-sunrise-600 rounded-full flex items-center justify-center mx-auto mb-4">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+						</svg>
+					</div>
+					<h3 class="text-xl font-semibold mb-2">Wellness</h3>
+					<p class="text-cream-200">Yoga, meditation, and sound healing practices</p>
+				</div>
+				<div class="text-center">
+					<div class="w-16 h-16 bg-sunrise-600 rounded-full flex items-center justify-center mx-auto mb-4">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+					</div>
+					<h3 class="text-xl font-semibold mb-2">Adventure</h3>
+					<p class="text-cream-200">Himalayan treks and cultural exploration</p>
+				</div>
+				<div class="text-center">
+					<div class="w-16 h-16 bg-sunrise-600 rounded-full flex items-center justify-center mx-auto mb-4">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+						</svg>
+					</div>
+					<h3 class="text-xl font-semibold mb-2">Sustainability</h3>
+					<p class="text-cream-200">Eco-friendly travel and community support</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Testimonials -->
+	<section class="py-20 bg-cream-50">
+		<div class="container mx-auto px-4">
+			<h2 class="text-4xl font-playfair font-bold text-center mb-12">Journey Stories</h2>
+			<div class="grid md:grid-cols-2 gap-8">
+				<div class="bg-white p-8 rounded-lg shadow-lg">
+					<blockquote class="text-forest-700 italic mb-4">
+						"The 30-day healing retreat transformed my life. The combination of yoga, meditation, and sound healing created a profound sense of peace and clarity."
+					</blockquote>
+					<p class="font-semibold">- Sarah M., USA</p>
+					<p class="text-forest-600">30-Day Healing Retreat Participant</p>
+				</div>
+				<div class="bg-white p-8 rounded-lg shadow-lg">
+					<blockquote class="text-forest-700 italic mb-4">
+						"The nature and culture combo was perfect! The Himalayan treks were breathtaking, and the cultural experiences added such depth to the journey."
+					</blockquote>
+					<p class="font-semibold">- Michael R., UK</p>
+					<p class="text-forest-600">15-Day Nature & Culture Participant</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA Section -->
+	<section class="py-20 bg-forest-900 text-white">
+		<div class="container mx-auto px-4 text-center">
+			<h2 class="text-4xl font-playfair font-bold mb-6">Ready to Begin Your Journey?</h2>
+			<p class="text-xl mb-8 max-w-2xl mx-auto">
+				Join us for a transformative experience that will nourish your soul and awaken your spirit.
+			</p>
+			<a
+				href="/contact"
+				class="inline-block bg-sunrise-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-sunrise-700 transition-colors"
+			>
+				Start Your Journey
+			</a>
+		</div>
+	</section>
+</Layout>

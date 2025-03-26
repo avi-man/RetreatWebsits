@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_package_features",
+  "info": {
+    "displayName": "Feature",
+    "description": "Feature of a package"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "newsletters",
+  "info": {
+    "singularName": "newsletter",
+    "pluralName": "newsletters",
+    "displayName": "Newsletter"
+  },
+  "options": {
+    "draftAndPublish": false,
+    "internationalization": true
+  },
+  "attributes": {
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "subscriptionDate": {
+      "type": "datetime",
+      "default": "now"
+    },
+    "preferences": {
+      "type": "json"
+    },
+    "locale": {
+      "type": "string"
+    }
+  }
+}

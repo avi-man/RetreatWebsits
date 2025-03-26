@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_form_submissions",
+  "info": {
+    "singularName": "contact-form-submission",
+    "pluralName": "contact-form-submissions",
+    "displayName": "Contact Form Submission"
+  },
+  "options": {
+    "draftAndPublish": false,
+    "internationalization": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "message": {
+      "type": "text",
+      "required": true
+    },
+    "subject": {
+      "type": "string"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["Pending", "Resolved", "Ignored"],
+      "default": "Pending"
+    },
+    "locale": {
+      "type": "string"
+    }
+  }
+}

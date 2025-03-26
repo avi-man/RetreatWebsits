@@ -1,0 +1,155 @@
+---
+import { languages, getLanguageFromPath, languageDirections } from '../lib/language';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Shalom Namaste - Your Journey to Inner Peace" } = Astro.props;
+const currentPath = Astro.url.pathname;
+const currentLang = getLanguageFromPath(currentPath);
+const dir = languageDirections[currentLang];
+---
+
+<!doctype html>
+<html lang={currentLang} dir={dir}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+	</head>
+	<body class="bg-cream-50 text-forest-900 font-poppins">
+		<header class="fixed w-full z-50 bg-white/80 backdrop-blur-sm shadow-sm">
+			<nav class="container mx-auto px-4 py-4">
+				<div class="flex justify-between items-center">
+					<a href={`/${currentLang}`} class="text-2xl font-playfair font-bold text-forest-900">ShalomNamaste</a>
+					<div class="hidden md:flex space-x-8">
+						<a href={`/${currentLang}/about`} class="hover:text-sunrise-600 transition-colors">About</a>
+						<a href={`/${currentLang}/packages`} class="hover:text-sunrise-600 transition-colors">Packages</a>
+						<a href={`/${currentLang}/blog`} class="hover:text-sunrise-600 transition-colors">Blog</a>
+						<a href={`/${currentLang}/contact`} class="hover:text-sunrise-600 transition-colors">Contact</a>
+						<a href="/faq" class="hover:text-sunrise-600 transition-colors">FAQ</a>
+					</div>
+					<div class="flex items-center">
+						<LanguageSwitcher />
+					</div>
+					<button class="md:hidden" id="mobile-menu-button">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+						</svg>
+					</button>
+				</div>
+				<!-- Mobile menu -->
+				<div class="hidden md:hidden" id="mobile-menu">
+					<div class="px-2 pt-2 pb-3 space-y-1">
+						<a href={`/${currentLang}/about`} class="block px-3 py-2 hover:bg-forest-50 rounded-md">About</a>
+						<a href={`/${currentLang}/packages`} class="block px-3 py-2 hover:bg-forest-50 rounded-md">Packages</a>
+						<a href={`/${currentLang}/blog`} class="block px-3 py-2 hover:bg-forest-50 rounded-md">Blog</a>
+						<a href={`/${currentLang}/contact`} class="block px-3 py-2 hover:bg-forest-50 rounded-md">Contact</a>
+						<a href="/faq" class="block px-3 py-2 hover:bg-forest-50 rounded-md">FAQ</a>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<main class="pt-20">
+			<slot />
+		</main>
+
+		<footer class="bg-forest-900 text-cream-50 py-12 mt-20">
+			<div class="container mx-auto px-4">
+				<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+					<div>
+						<h3 class="text-xl font-playfair font-bold mb-4">ShalomNamaste</h3>
+						<p class="text-cream-200">Where peace meets adventure in the heart of the Himalayas.</p>
+					</div>
+					<div>
+						<h4 class="font-semibold mb-4">Quick Links</h4>
+						<ul class="space-y-2">
+							<li><a href={`/${currentLang}/about`} class="hover:text-sunrise-400 transition-colors">About Us</a></li>
+							<li><a href={`/${currentLang}/packages`} class="hover:text-sunrise-400 transition-colors">Our Packages</a></li>
+							<li><a href={`/${currentLang}/blog`} class="hover:text-sunrise-400 transition-colors">Blog</a></li>
+							<li><a href={`/${currentLang}/contact`} class="hover:text-sunrise-400 transition-colors">Contact</a></li>
+						</ul>
+					</div>
+					<div>
+						<h4 class="font-semibold mb-4">Contact</h4>
+						<ul class="space-y-2">
+							<li>Email: info@shalomnamaste.com</li>
+							<li>Phone: +91 1234567890</li>
+							<li>Address: Himalayan Valley, India</li>
+						</ul>
+					</div>
+					<div>
+						<h4 class="font-semibold mb-4">Follow Us</h4>
+						<div class="flex space-x-4">
+							<a href="#" class="hover:text-sunrise-400 transition-colors">Instagram</a>
+							<a href="#" class="hover:text-sunrise-400 transition-colors">Facebook</a>
+							<a href="#" class="hover:text-sunrise-400 transition-colors">Twitter</a>
+						</div>
+					</div>
+				</div>
+				<div class="border-t border-forest-800 mt-8 pt-8 text-center text-cream-200">
+					<p>&copy; {new Date().getFullYear()} ShalomNamaste. All rights reserved.</p>
+				</div>
+			</div>
+		</footer>
+
+		<script>
+			const mobileMenuButton = document.getElementById('mobile-menu-button');
+			const mobileMenu = document.getElementById('mobile-menu');
+
+			mobileMenuButton?.addEventListener('click', () => {
+				mobileMenu?.classList.toggle('hidden');
+			});
+		</script>
+	</body>
+</html>
+
+<style>
+	:root {
+		--color-forest-900: #1B4332;
+		--color-forest-800: #2D6A4F;
+		--color-forest-700: #40916C;
+		--color-sunrise-600: #E85D04;
+		--color-cream-50: #FDF6E9;
+	}
+
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	body {
+		font-family: 'Poppins', sans-serif;
+	}
+
+	.font-playfair {
+		font-family: 'Playfair Display', serif;
+	}
+
+	.bg-forest-900 { background-color: var(--color-forest-900); }
+	.bg-forest-800 { background-color: var(--color-forest-800); }
+	.bg-forest-700 { background-color: var(--color-forest-700); }
+	.bg-sunrise-600 { background-color: var(--color-sunrise-600); }
+	.bg-cream-50 { background-color: var(--color-cream-50); }
+
+	.text-forest-900 { color: var(--color-forest-900); }
+	.text-forest-800 { color: var(--color-forest-800); }
+	.text-forest-700 { color: var(--color-forest-700); }
+	.text-sunrise-600 { color: var(--color-sunrise-600); }
+	.text-cream-50 { color: var(--color-cream-50); }
+	.text-cream-200 { color: #F5E6D3; }
+
+	.border-forest-800 { border-color: var(--color-forest-800); }
+</style>

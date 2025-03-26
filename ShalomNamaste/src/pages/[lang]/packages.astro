@@ -1,0 +1,149 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getLanguageFromPath } from '../../lib/language';
+import { t } from '../../lib/translations';
+import { fetchPackages } from '../../lib/strapi';
+
+const { lang } = Astro.params;
+const currentLang = getLanguageFromPath(Astro.url.pathname);
+
+// Fetch all packages
+const { data: packages } = await fetchPackages(currentLang);
+
+// Helper function to get image URL with fallback
+const getImageUrl = (pkg: any) => {
+  if (!pkg?.attributes?.image?.data?.attributes?.url) {
+    return '/images/placeholder.jpg';
+  }
+  return `${import.meta.env.PUBLIC_STRAPI_API_URL}${pkg.attributes.image.data.attributes.url}`;
+};
+
+// Helper function to get package title with fallback
+const getPackageTitle = (pkg: any) => {
+  return pkg?.attributes?.title || t('packages.untitled', currentLang);
+};
+---
+
+<Layout
+  title={t('packages.title', currentLang)}
+  description={t('packages.subtitle', currentLang)}
+>
+  <!-- Hero Section -->
+  <section class="relative py-20 bg-forest-900 text-white">
+    <div class="absolute inset-0">
+      <img
+        src="/images/healing-retreat.jpg"
+        alt="Healing Retreat"
+        class="w-full h-full object-cover opacity-20"
+      />
+    </div>
+    <div class="relative container mx-auto px-4">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">
+          {t('packages.title', currentLang)}
+        </h1>
+        <p class="text-xl">
+          {t('packages.subtitle', currentLang)}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Packages Grid -->
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {packages?.map((pkg) => (
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <img
+              src={getImageUrl(pkg)}
+              alt={getPackageTitle(pkg)}
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold text-forest-900 mb-4">
+                {getPackageTitle(pkg)}
+              </h3>
+              <p class="text-forest-700 mb-4">
+                {pkg?.attributes?.description || t('packages.noDescription', currentLang)}
+              </p>
+              <ul class="space-y-2 mb-6">
+                {pkg?.attributes?.features?.map((feature: string) => (
+                  <li class="flex items-center">
+                    <svg
+                      class="w-5 h-5 text-sunrise-600 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-sunrise-600">
+                  {pkg?.attributes?.price || t('packages.priceOnRequest', currentLang)}
+                </span>
+                <a
+                  href={`/${currentLang}/contact`}
+                  class="bg-sunrise-600 text-white px-6 py-2 rounded-full hover:bg-sunrise-700 transition-colors"
+                >
+                  {t('common.bookNow', currentLang)}
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 bg-forest-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-forest-900 mb-4">
+          {t('packages.faq.title', currentLang)}
+        </h2>
+      </div>
+      <div class="max-w-3xl mx-auto space-y-6">
+        <!-- FAQ Item 1 -->
+        <div class="bg-white rounded-lg p-6 shadow-md">
+          <h3 class="text-xl font-semibold text-forest-900 mb-2">
+            {t('packages.faq.questions.q1', currentLang)}
+          </h3>
+          <p class="text-forest-700">
+            {t('packages.faq.questions.a1', currentLang)}
+          </p>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="bg-white rounded-lg p-6 shadow-md">
+          <h3 class="text-xl font-semibold text-forest-900 mb-2">
+            {t('packages.faq.questions.q2', currentLang)}
+          </h3>
+          <p class="text-forest-700">
+            {t('packages.faq.questions.a2', currentLang)}
+          </p>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="bg-white rounded-lg p-6 shadow-md">
+          <h3 class="text-xl font-semibold text-forest-900 mb-2">
+            {t('packages.faq.questions.q3', currentLang)}
+          </h3>
+          <p class="text-forest-700">
+            {t('packages.faq.questions.a3', currentLang)}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout> 
